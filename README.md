@@ -69,39 +69,53 @@ Now, Queue becomes empty, So, terminate these process of iteration.
 </ol>
 
 <hr>
-<h3>Sample Input</h3>
+<h3>Source code</h3>
 <hr>
-7 9 <BR>
-A B <BR>
-A C <BR>
-A F <BR>
-C E <BR>
-C F <BR>
-C D <BR>
-D E <BR>
-D G <BR>
-G F <BR>
+
+```
+from collections import deque
+
+graph = {}
+
+data = input().split()
+v = int(data[0])
+e = int(data[1])
+
+for i in range(e):
+    u = data[2 + i * 2]
+    w = data[3 + i * 2]
+
+    if u not in graph:
+        graph[u] = []
+    if w not in graph:
+        graph[w] = []
+
+    graph[u].append(w)
+    graph[w].append(u)
+
+start = data[2 + e * 2]
+
+visited = [start]
+queue = deque([start])
+
+while queue:
+    node = queue.popleft()
+
+    for neighbour in graph[node]:
+        if neighbour not in visited:
+            visited.append(neighbour)
+            queue.append(neighbour)
+
+print("BFS Traversal:", " -> ".join(visited))
+```
 <hr>
-<h3>Sample Output</h3>
+<h3>Output</h3>
 <hr>
-['A', 'B', 'C', 'F', 'E', 'D', 'G']
 
 <hr>
 
-<hr>
-<h3>Sample Input</h3>
-<hr>
-5 6 <BR>
-0 1 <BR>
-0 2 <BR>
-1 2 <BR>
-1 3 <BR>
-2 4 <BR>
-3 4 <BR>
-<hr>
-<h3>Sample Output</h3>
-<hr>
-['0', '1', '2', '3', '4']
+<img width="408" height="171" alt="image" src="https://github.com/user-attachments/assets/914bff72-21b5-4eaa-a306-7de1301396dc" />
+
 <hr>
 <h3>Result:</h3>
 <hr>
